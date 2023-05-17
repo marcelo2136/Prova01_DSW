@@ -1,0 +1,29 @@
+
+O maior problema do props drilling é que ele passa daods para meios em que o props seria inútil, ou seja,
+funções que não precisam de um determinado props vão tê-lo passado até que o props encontre o seu destino.
+
+exemplo:
+
+		  o
+		 / \
+	 	O   O
+	 	|  / \
+	 	x o   O
+	 	     / \
+	 	    x   o
+
+Considere que apenas os "x" vão receber o props. Cada um dos "O" que não precisam dele irão recebê-lo até que
+encontrem um "x", o que é uma ação desnecessária e ineficiente. O useContext permite que a informação seja 
+passada através de um arquivo separado, de tal forma que basta que os "x" utilizem o contexto, o que evita a 
+ocorrência do drilling e permite que apenas os arquivos que necessitem do context o utilizem.
+
+			  o
+			 / \
+	 		o   o
+ctxt	 	|  / \
+	|_______x o   o
+	| 		     / \
+	|___________x   o
+
+Com o contexto "ctxt", basta que os "x" o importem para que eles tenham acesso aos dados que por drilling
+teriam que atravessar outras funções que não precisam de tais dados.
